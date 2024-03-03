@@ -90,7 +90,7 @@ void RCC_voidInitSysClock(void)
     #if RCC_CLOCK_TYPE == RCC_HSI  /*Enable HSI with Trimming choice*/
     SET_BIT(RCC_CR,RCC_CR_HSION);
     RCC_CR &= HSI_TRIMMING_MASK ;
-    RCC_RC |= RCC_HSI_TRIMMING ;
+    RCC_CR |= RCC_HSI_TRIMMING ;
     #elif RCC_CLOCK_TYPE == RCC_HSE_RC     /*Enable HSE with bypass*/
     SET_BIT(RCC_CR,RCC_CR_HSEBYP);
     SET_BIT(RCC_CR,RCC_CR_HSEON);

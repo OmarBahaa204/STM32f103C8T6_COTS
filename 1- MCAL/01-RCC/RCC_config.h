@@ -118,6 +118,6 @@
                                             3- RCC_HSE_CRYSTAL
                                             3- RCC_PLL
 */
-#define RCC_CLOCK_TYPE          RCC_PLL
+#define RCC_CLOCK_TYPE          RCC_HSI
 
 #endif
