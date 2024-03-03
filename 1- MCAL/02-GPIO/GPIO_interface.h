@@ -66,6 +66,26 @@
 #define PIN13       13
 #define PIN14       14
 #define PIN15       15
+/* ********                 Options Of PORT MODE                  ******** */
+#define INPUT_ANALOG_PORT                                   0x00000000
+#define INPUT_FLOATING_PORT                                 0x44444444
+#define INPUT_PULL_UP_PORT                                  0x88888888
+#define INPUT_PULL_DOWN_PORT                                0x88888888
+#define OUTPUT_PORT_MAX_2MHZ_GP_PUSH_PULL                   0x22222222
+#define OUTPUT_PORT_MAX_10MHZ_GP_PUSH_PULL                  0x11111111
+#define OUTPUT_PORT_MAX_50MHZ_GP_PUSH_PULL                  0x33333333
+#define OUTPUT_PORT_MAX_2MHZ_GP_OPEN_DRAIN                  0x66666666
+#define OUTPUT_PORT_MAX_10MHZ_GP_OPEN_DRAIN                 0x55555555
+#define OUTPUT_PORT_MAX_50MHZ_GP_OPEN_DRAIN                 0x77777777
+#define OUTPUT_PORT_MAX_2MHZ_AF_PUSH_PULL                   0xAAAAAAAA
+#define OUTPUT_PORT_MAX_10MHZ_AF_PUSH_PULL                  0x99999999
+#define OUTPUT_PORT_MAX_50MHZ_AF_PUSH_PULL                  0xBBBBBBBB
+#define OUTPUT_PORT_MAX_2MHZ_AF_OPEN_DRAIN                  0xEEEEEEEE
+#define OUTPUT_PORT_MAX_10MHZ_AF_OPEN_DRAIN                 0xDDDDDDDD
+#define OUTPUT_PORT_MAX_50MHZ_AF_OPEN_DRAIN                 0xFFFFFFFF
+/* ********                 Options Of PORT Value               ******** */
+#define OUTPUTT_PORT_HIGH               0xFFFFFFFF
+#define OUTPUT_PORT_LOW                 0x00000000
 
 /**************************************************************************/
 /* *********************                          *********************** */
@@ -168,4 +188,48 @@ u8 GPIO_u8SetPinValue(u8 copy_u8Port , u8 copy_u8Pin , u8 copy_u8Value);
 */
 u8 GPIO_u8GetPinValue(u8 copy_u8Port , u8 copy_u8Pin , u8* copy_pu8result);
 /**************************************************************************/
+/*01- Function used to set Direction of Full PORT
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+    1.2- Options of copy_u8Mode :
+                                    1- INPUT_ANALOG_PORT
+                                    2- INPUT_FLOATING_PORT
+                                    3- INPUT_PULL_UP_PORT
+                                    4- INPUT_PULL_DOWN_PORT
+                                    5- OUTPUT_PORT_MAX_2MHZ_GP_PUSH_PULL
+                                    6- OUTPUT_PORT_MAX_10MHZ_GP_PUSH_PULL
+                                    7- OUTPUT_PORT_MAX_50MHZ_GP_PUSH_PULL
+                                    8- OUTPUT_PORT_MAX_2MHZ_GP_OPEN_DRAIN
+                                    9- OUTPUT_PORT_MAX_10MHZ_GP_OPEN_DRAIN
+                                    10- OUTPUT_PORT_MAX_50MHZ_GP_OPEN_DRAIN
+                                    11- OUTPUT_PORT_MAX_2MHZ_AF_PUSH_PULL
+                                    12- OUTPUT_PORT_MAX_10MHZ_AF_PUSH_PULL
+                                    13- OUTPUT_PORT_MAX_50MHZ_AF_PUSH_PULL
+                                    14- OUTPUT_PORT_MAX_2MHZ_AF_OPEN_DRAIN
+                                    15- OUTPUT_PORT_MAX_10MHZ_AF_OPEN_DRAIN
+                                    16- OUTPUT_PORT_MAX_50MHZ_AF_OPEN_DRAIN
+                      
+*/
+u8 GPIO_u8SetPortDirection(u8 copy_u8Port , u8 copy_u8Mode);
+/**************************************************************************/
+/*01- Function used to set Value of each pin
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+    1.2- Options of copy_u8Value if full high or full low:
+                                                            1- OUTPUTT_PORT_HIGH
+                                                            2- OUTPUT_PORT_LOW                       
+*/
+u8 GPIO_u8SetPortValue(u8 copy_u8Port , u8 copy_u8Value);
+/**************************************************************************/
+/*01- Function used to get Value of a pin
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+u8 GPIO_u8GetPortValue(u8 copy_u8Port , u8* copy_pu8result)
+*/
 #endif

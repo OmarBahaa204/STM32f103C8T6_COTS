@@ -13,9 +13,9 @@
 /****************************** Includes **********************************/
 /******************************          **********************************/
 /**************************************************************************/
-#include "STD_TYPES.h"
-#include "STD_ERRORS.h"
-#include "BIT_MATH.h"
+#include "../../4- LIB/STD_TYPES.h"
+#include "../../4- LIB/STD_ERRORS.h"
+#include "../../4- LIB/BIT_MATH.h"
 #include "GPIO_private.h"
 #include "GPIO_config.h"
 #include "GPIO_interface.h"
@@ -43,6 +43,7 @@
 #define EACH_PIN_BITS           4
 #define PIN_MODE_MASK           0b1111
 #define MAX_PIN_NO              16
+
 /**************************************************************************/
 /**************************                       *************************/
 /************************** Function declarations *************************/
@@ -182,54 +183,37 @@ u8 GPIO_u8SetPinValue(u8 copy_u8Port , u8 copy_u8Pin , u8 copy_u8Value)
 {
 
     u8 local_u8ErrorStatus = RT_OK ;
-    switch(copy_u8Port)
+    if(copy_u8Pin < MAX_PIN_NO)
     {
-        case PORTA : 
-           if(copy_u8Pin < MAX_PIN_NO)
-           {
-                switch(copy_u8Value)
-                {
-                    case OUTPUT_HIGH : SET_BIT(GPIO_PORTA_ODR , copy_u8Pin ); break;
-                    case OUTPUT_LOW : CLR_BIT(GPIO_PORTA_ODR , copy_u8Pin ); break;
-                    default : local_u8ErrorStatus = RT_NOK ;
-                }
-           }
-           else 
-           {
-                local_u8ErrorStatus = RT_NOK ;
-           }
-            break;
-        case PORTB : 
-           if(copy_u8Pin < MAX_PIN_NO)
-           {
-                switch(copy_u8Value)
-                {
-                    case OUTPUT_HIGH : SET_BIT(GPIO_PORTB_ODR , copy_u8Pin ); break;
-                    case OUTPUT_LOW : CLR_BIT(GPIO_PORTB_ODR , copy_u8Pin ); break;
-                    default : local_u8ErrorStatus = RT_NOK ;
-                }
-           }
-           else 
-           {
-                local_u8ErrorStatus = RT_NOK ;
-           }
-            break;
-        case PORTC : 
-           if(copy_u8Pin < MAX_PIN_NO)
-           {
-                switch(copy_u8Value)
-                {
-                    case OUTPUT_HIGH : SET_BIT(GPIO_PORTC_ODR , copy_u8Pin ); break;
-                    case OUTPUT_LOW : CLR_BIT(GPIO_PORTC_ODR , copy_u8Pin ); break;
-                    default : local_u8ErrorStatus = RT_NOK ;
-                }
-           }
-           else 
-           {
-                local_u8ErrorStatus = RT_NOK ;
-           }
-            break;
-        default : local_u8ErrorStatus = RT_NOK ;
+        switch(copy_u8Port)
+        {
+            case PORTA : 
+                    switch(copy_u8Value)
+                    {
+                        case OUTPUT_HIGH : SET_BIT(GPIO_PORTA_ODR , copy_u8Pin ); break;
+                        case OUTPUT_LOW : CLR_BIT(GPIO_PORTA_ODR , copy_u8Pin ); break;
+                        default : local_u8ErrorStatus = RT_NOK ; break ;
+                    } break;
+            case PORTB : 
+                    switch(copy_u8Value)
+                    {
+                        case OUTPUT_HIGH : SET_BIT(GPIO_PORTB_ODR , copy_u8Pin ); break;
+                        case OUTPUT_LOW : CLR_BIT(GPIO_PORTB_ODR , copy_u8Pin ); break;
+                        default : local_u8ErrorStatus = RT_NOK ; break;
+                    } break;
+            case PORTC :
+                    switch(copy_u8Value)
+                    {
+                        case OUTPUT_HIGH : SET_BIT(GPIO_PORTC_ODR , copy_u8Pin ); break;
+                        case OUTPUT_LOW : CLR_BIT(GPIO_PORTC_ODR , copy_u8Pin ); break;
+                        default : local_u8ErrorStatus = RT_NOK ; break;
+                    }break;
+            default : local_u8ErrorStatus = RT_NOK ; break ;
+        }
+    }
+    else 
+    {
+        local_u8ErrorStatus = RT_NOK ;
     }
     return local_u8ErrorStatus;
 }
@@ -276,3 +260,70 @@ u8 GPIO_u8GetPinValue(u8 copy_u8Port , u8 copy_u8Pin , u8* copy_pu8Result)
     }
     return local_u8ErrorStatus ;
 }
+/**************************************************************************/
+/*01- Function used to set Direction of Full PORT
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+    1.2- Options of copy_u8Mode :
+                                    1- INPUT_ANALOG_PORT
+                                    2- INPUT_FLOATING_PORT
+                                    3- INPUT_PULL_UP_PORT
+                                    4- INPUT_PULL_DOWN_PORT
+                                    5- OUTPUT_PORT_MAX_2MHZ_GP_PUSH_PULL
+                                    6- OUTPUT_PORT_MAX_10MHZ_GP_PUSH_PULL
+                                    7- OUTPUT_PORT_MAX_50MHZ_GP_PUSH_PULL
+                                    8- OUTPUT_PORT_MAX_2MHZ_GP_OPEN_DRAIN
+                                    9- OUTPUT_PORT_MAX_10MHZ_GP_OPEN_DRAIN
+                                    10- OUTPUT_PORT_MAX_50MHZ_GP_OPEN_DRAIN
+                                    11- OUTPUT_PORT_MAX_2MHZ_AF_PUSH_PULL
+                                    12- OUTPUT_PORT_MAX_10MHZ_AF_PUSH_PULL
+                                    13- OUTPUT_PORT_MAX_50MHZ_AF_PUSH_PULL
+                                    14- OUTPUT_PORT_MAX_2MHZ_AF_OPEN_DRAIN
+                                    15- OUTPUT_PORT_MAX_10MHZ_AF_OPEN_DRAIN
+                                    16- OUTPUT_PORT_MAX_50MHZ_AF_OPEN_DRAIN
+                      
+*/
+u8 GPIO_u8SetPortDirection(u8 copy_u8Port , u8 copy_u8Mode)
+{
+    u8 local_u8ErrorStatus = RT_OK ;
+    switch (copy_u8Port)
+    {
+        case PORTA :  GPIO_PORTA_CRL =  copy_u8Mode ; GPIO_PORTA_CRH =  copy_u8Mode ; break;
+        case PORTB :  GPIO_PORTB_CRL =  copy_u8Mode ; GPIO_PORTB_CRH =  copy_u8Mode ; break;
+        case PORTC :  GPIO_PORTC_CRL =  copy_u8Mode ; GPIO_PORTC_CRH =  copy_u8Mode ; break;
+        default : local_u8ErrorStatus = RT_NOK ;
+    }
+    return local_u8ErrorStatus ;
+}
+/**************************************************************************/
+/*01- Function used to set Value of each pin
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+    1.2- Options of copy_u8Value if full high or full low:
+                                                            1- OUTPUTT_PORT_HIGH
+                                                            2- OUTPUT_PORT_LOW  
+*/
+u8 GPIO_u8SetPortValue(u8 copy_u8Port , u8 copy_u8Value)
+{
+    u8 local_u8ErrorStatus = RT_OK ;
+    switch(copy_u8Port)
+    {
+        case PORTA :  GPIO_PORTA_ODR = copy_u8Value ; break;
+        case PORTB :  GPIO_PORTB_ODR = copy_u8Value ; break;
+        case PORTC :  GPIO_PORTC_ODR = copy_u8Value ; break;
+        default : local_u8ErrorStatus = RT_NOK ; break ;
+    }
+    return local_u8ErrorStatus ;
+}
+/**************************************************************************/
+/*01- Function used to get Value of a pin
+    1.1- Options of copy_u8Port : 
+                                1- PORTA
+                                2- PORTB
+                                3- PORTC
+u8 GPIO_u8GetPortValue(u8 copy_u8Port , u8* copy_pu8result)
+*/
