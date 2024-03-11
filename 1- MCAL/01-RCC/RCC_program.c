@@ -13,9 +13,9 @@
 /****************************** Includes **********************************/
 /******************************          **********************************/
 /**************************************************************************/
-#include "..\..\4- LIB\STD_TYPES.h"
-#include "..\..\4- LIB\STD_ERRORS.h"
-#include "..\..\4- LIB\BIT_MATH.h"
+#include "STD_TYPES.h"
+#include "STD_ERRORS.h"
+#include "BIT_MATH.h"
 #include "RCC_interface.h"
 #include "RCC_private.h"
 #include "RCC_config.h"
@@ -40,6 +40,7 @@
 /************************** Function declarations *************************/
 /**************************                       *************************/
 /**************************************************************************/
+/*Options: */
 u8 RCC_u8EnableClock(u8 copy_u8BusId , u8 copy_u8PeripheralId)
 {
     u8 local_u8ErrorStatus = RT_OK ; 

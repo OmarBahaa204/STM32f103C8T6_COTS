@@ -34,7 +34,7 @@
                                                1- CSS_ON
                                                2- CSS_OFF
 */
-#define RCC_CLOCK_DETECTOR               CSS_ON  
+#define RCC_CLOCK_DETECTOR               CSS_OFF
 /*
     04- Options for HSI clock Trimming : 
                                         1-  TRIM_MINUS_16_TIMES_40MHZ
@@ -73,15 +73,15 @@
 #define RCC_HSI_TRIMMING               NO_TRIMMING 
 /*    
     06- Options for MCO pin (Outout Clock) : 
-                                            1- NO_CLOCK
-                                            2- SYS_CLOCK
-                                            3- HSI_CLOCK
-                                            4- HSE_CLOCK
-                                            5- PLL_CLOCK_DIV2
+                                            1- MCO_NO_CLOCK
+                                            2- MCO_SYS_CLOCK
+                                            3- MCO_HSI_CLOCK
+                                            4- MCO_HSE_CLOCK
+                                            5- MCO_PLL_CLOCK_DIV2
 */
 #define RCC_MCO_PIN_CLOCK_SELLECTION             NO_CLOCK                
 /*  
-    07- Options for PLL multipliction Factor : 
+    07- Options for PLL multiplication Factor :
                                             1- PLL_INPUT_CLOCK_X2
                                             2- PLL_INPUT_CLOCK_X3
                                             3- PLL_INPUT_CLOCK_X4
@@ -106,7 +106,7 @@
 */
 #define RCC_PLL_CLOCK_SOURCE            HSE_CLOCK
 /*  
-    08- Options for HSE Divesion if used for PLL source : 
+    08- Options for HSE Division if used for PLL source :
                                     1- HSE_CLOCK_DIV2
                                     2- HSE_NO_DIV
 */  
@@ -118,6 +118,6 @@
                                             3- RCC_HSE_CRYSTAL
                                             3- RCC_PLL
 */
-#define RCC_CLOCK_TYPE          RCC_HSI
+#define RCC_CLOCK_TYPE          RCC_HSE_RC
 
 #endif

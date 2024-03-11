@@ -9,8 +9,9 @@
 #ifndef STD_ERRORS_H_
 #define STD_ERRORS_H_
 
-#define		RT_OK		0
-#define		RT_NOK	1
-#define		NULL		0
+#define		RT_OK		    0
+#define		RT_NOK	        1
+#define		NULL		    0
+#define     NULL_POINTER    0x00000000
 
 #endif /* LIBRARY_STD_ERRORS_H_ */

@@ -268,13 +268,13 @@
 /*05- Options for HSI Clock Enable*/
 #define HSI_ON          1
 #define HSI_OFF         0
-/*06- Options for MCO pin (Outout Clock)*/  
-#define NO_CLOCK                000      
-#define SYS_CLOCK               100
-#define HSI_CLOCK               101
-#define HSE_CLOCK               110
+/*06- Options for MCO pin (Output Clock)*/
+#define MCO_NO_CLOCK                000
+#define MCO_SYS_CLOCK               100
+#define MCO_HSI_CLOCK               101
+#define MCO_HSE_CLOCK               110
 #define PLL_CLOCK_DIV2          111
-/*07- Options for PLL multipliction Factor*/ 
+/*07- Options for PLL multiplication Factor*/
 #define PLL_INPUT_CLOCK_X2      0000
 #define PLL_INPUT_CLOCK_X3      0001
 #define PLL_INPUT_CLOCK_X4      0010

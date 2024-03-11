@@ -2,7 +2,7 @@
 /**************************************************************************/
 /**********************      Author  : Omar Bahaa     *********************/
 /**********************      Layer   : MCAl           *********************/
-/**********************      SWC     : RCC_Stm32      *********************/
+/**********************      SWC     : NVIC_Stm32     *********************/
 /**********************      Version : 1.00           *********************/
 /**********************      Date    : 08/03/2024     *********************/
 /**************************************************************************/
@@ -21,6 +21,8 @@
 /* *********************        definitions       *********************** */
 /* *********************                          *********************** */
 /**************************************************************************/
+
+/* ********               External Interrupts ID                 ******** */
 #define INTERRUPT_WWDG                      0
 #define INTERRUPT_PVD                       1
 #define INTERRUPT_TAMPER                    2
@@ -81,11 +83,59 @@
 #define INTERRUPT_DMA2_CHANNEL_2            57
 #define INTERRUPT_DMA2_CHANNEL_3            58
 #define INTERRUPT_DMA2_CHANNEL_4_5          59
+
+
+
+/* ********                    Group Priorities                   ******** */
+#define NO_GROUP_PRIORITY            0
+#define GROUP_PRIORITY_0             0
+#define GROUP_PRIORITY_1             1
+#define GROUP_PRIORITY_2             2
+#define GROUP_PRIORITY_3             3
+#define GROUP_PRIORITY_4             4
+#define GROUP_PRIORITY_5             5
+#define GROUP_PRIORITY_6             6
+#define GROUP_PRIORITY_7             7
+#define GROUP_PRIORITY_8             8
+#define GROUP_PRIORITY_9             9
+#define GROUP_PRIORITY_10            10
+#define GROUP_PRIORITY_11            11
+#define GROUP_PRIORITY_12            12
+#define GROUP_PRIORITY_13            13
+#define GROUP_PRIORITY_14            14
+#define GROUP_PRIORITY_15            15
+/* ********                     SUB Priorities                    ******** */
+#define NO_SUB_PRIORITY 			0
+#define SUB_PRIORITY_0 				0
+#define SUB_PRIORITY_1 				1
+#define SUB_PRIORITY_2 				2
+#define SUB_PRIORITY_3 				3
+#define SUB_PRIORITY_4 				4
+#define SUB_PRIORITY_5 				5
+#define SUB_PRIORITY_6 				6
+#define SUB_PRIORITY_7 				7
+#define SUB_PRIORITY_8 				8
+#define SUB_PRIORITY_9 				9
+#define SUB_PRIORITY_10 			10
+#define SUB_PRIORITY_11 			11
+#define SUB_PRIORITY_12 			12
+#define SUB_PRIORITY_13 			13
+#define SUB_PRIORITY_14 			14
+#define SUB_PRIORITY_15 			15
+
 /**************************************************************************/
 /* *********************                          *********************** */
 /* *********************    Function Proto_Type   *********************** */
 /* *********************                          *********************** */
 /**************************************************************************/
+
+/**************************************************************************/
+/*Function: NVIC_u8voidInit                                   			  */
+/*I/P Parameters: <pre>-configurations         							  */
+/*Returns: Noting				                            			  */
+/*Desc:This Function Sets the group and the sub priority Distribution     */
+/**************************************************************************/
+void NVIC_voidInit(void);
 
 /*Options :
             1- INTERRUPT_WWDG            
@@ -405,4 +455,18 @@ Result of copy_pu8StatusResult :
                                 2- (1) if active
 */
 u8 NVIC_u8GetFlagStatus(u8 copy_u8InterruptNumber , u8* copy_pu8StatusResult);
+
+/******************************************************************************/
+/*Function: NVIC_u8SetPriority                                   			  */
+/*I/P Parameters: Interrupt ID              								  */
+/*Returns:it returns Error Status                            				  */
+/*Desc:This Function Sets the group and the sub priority for required INT     */
+/******************************************************************************/
+/*
+ * Options for Copy_u8GroupPriority:- GROUP_PRIORITY_0 ... GROUP_PRIORITY_15
+ * Options for Copy_u8SubPriority  :- SUB_PRIORITY_0   ... SUB_PRIORITY_15
+ *
+ */
+/******************************************************************************/
+u8 NVIC_u8SetPriority(s8 copy_u8INTID, u8 copy_u8GroupPriority, u8 copy_u8SubPriority);
 #endif
